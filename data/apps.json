@@ -1,0 +1,47 @@
+[
+    {
+        "id": "ai-pre-anesthetic-agent",
+        "name": "Agente IA de Evaluación Pre-anestésica",
+        "description": "Desarrollo de un agente inteligente diseñado para realizar y asistir en evaluaciones pre-anestésicas, optimizando el tiempo clínico y estandarizando la recolección de datos críticos de pacientes.",
+        "tech_stack": [
+            "Python",
+            "LLMs",
+            "Medical AI",
+            "Healthcare Agents"
+        ],
+        "demo_url": null,
+        "github_url": null,
+        "image_url": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1000",
+        "featured": true
+    },
+    {
+        "id": "research-ai-anesthesia",
+        "name": "Investigación: IA en el Trabajo del Anestesista",
+        "description": "Proyecto de investigación centrado en analizar y cuantificar el impacto de las herramientas de Inteligencia Artificial en el flujo de trabajo, toma de decisiones y eficiencia de los médicos anestesistas.",
+        "tech_stack": [
+            "Data Science",
+            "Research",
+            "Statistics",
+            "Healthcare Analytics"
+        ],
+        "demo_url": null,
+        "github_url": null,
+        "image_url": "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=1000",
+        "featured": true
+    },
+    {
+        "id": "learning-journey",
+        "name": "Data Science & Python Learning",
+        "description": "Mi viaje continuo aprendiendo programación en Python y Data Science para cerrar la brecha entre la medicina clínica y la tecnología avanzada.",
+        "tech_stack": [
+            "Python",
+            "Pandas",
+            "Scikit-learn",
+            "Jupyter"
+        ],
+        "demo_url": null,
+        "github_url": "https://github.com/pablogaray",
+        "image_url": "https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&q=80&w=1000",
+        "featured": false
+    }
+]
