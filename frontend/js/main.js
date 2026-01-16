@@ -69,15 +69,18 @@ class AppsManager {
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="app-card">
                     <div class="app-image">
-                        <i class="fas fa-${this.getAppIcon(app.tech_stack)}"></i>
+                        ${app.image_url ?
+                `<img src="${app.image_url}" alt="${app.name}" style="width: 100%; height: 100%; object-fit: cover;">` :
+                `<i class="fas fa-${this.getAppIcon(app.tech_stack)}"></i>`
+            }
                     </div>
                     <div class="app-content">
                         <h3 class="app-title">${app.name}</h3>
                         <p class="app-description">${app.description}</p>
                         <div class="app-tech">
                             ${app.tech_stack.slice(0, 4).map(tech =>
-            `<span class="tech-badge">${tech}</span>`
-        ).join('')}
+                `<span class="tech-badge">${tech}</span>`
+            ).join('')}
                         </div>
                         <div class="app-links">
                             ${app.demo_url ?
@@ -135,7 +138,7 @@ class AppsManager {
 class BlogManager {
     constructor() {
         this.blogGrid = document.getElementById('blogGrid');
-        
+
         // Modal elements
         this.modal = document.getElementById('blogModal');
         this.modalBackdrop = document.getElementById('blogModalBackdrop');
@@ -154,7 +157,7 @@ class BlogManager {
         // Modal event listeners
         this.modalClose.addEventListener('click', () => this.closeModal());
         this.modalBackdrop.addEventListener('click', () => this.closeModal());
-        
+
         // Close on escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && this.modal.classList.contains('active')) {
@@ -242,9 +245,9 @@ class BlogManager {
         this.modalTitle.textContent = post.title;
         this.modalDate.innerHTML = `<i class="far fa-calendar me-1"></i>${this.formatDate(post.date)}`;
         this.modalAuthor.innerHTML = `<i class="far fa-user me-1"></i>${post.author}`;
-        
+
         if (post.tags && post.tags.length > 0) {
-            this.modalTags.innerHTML = post.tags.map(tag => 
+            this.modalTags.innerHTML = post.tags.map(tag =>
                 `<span class="tag-badge">${tag}</span>`
             ).join('');
         } else {
