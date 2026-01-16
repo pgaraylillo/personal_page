@@ -222,6 +222,28 @@
         </div>
     </footer>
 
+    <!-- Blog Modal -->
+    <div class="blog-modal" id="blogModal">
+        <div class="blog-modal-backdrop" id="blogModalBackdrop"></div>
+        <div class="blog-modal-content">
+            <button class="blog-modal-close" id="blogModalClose" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="blog-modal-header">
+                <div class="blog-modal-meta">
+                    <span id="modalDate"></span>
+                    <span class="mx-2">•</span>
+                    <span id="modalAuthor"></span>
+                </div>
+                <h2 id="modalTitle"></h2>
+                <div class="blog-tags" id="modalTags"></div>
+            </div>
+            <div class="blog-modal-body" id="modalBody">
+                <!-- Content will be injected here -->
+            </div>
+        </div>
+    </div>
+
     <!-- AI Chat Widget -->
     <div class="chat-widget" id="chatWidget">
         <button class="chat-toggle" id="chatToggle" aria-label="Toggle chat">

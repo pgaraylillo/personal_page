@@ -135,7 +135,32 @@ class AppsManager {
 class BlogManager {
     constructor() {
         this.blogGrid = document.getElementById('blogGrid');
+        
+        // Modal elements
+        this.modal = document.getElementById('blogModal');
+        this.modalBackdrop = document.getElementById('blogModalBackdrop');
+        this.modalClose = document.getElementById('blogModalClose');
+        this.modalTitle = document.getElementById('modalTitle');
+        this.modalDate = document.getElementById('modalDate');
+        this.modalAuthor = document.getElementById('modalAuthor');
+        this.modalTags = document.getElementById('modalTags');
+        this.modalBody = document.getElementById('modalBody');
+
+        this.init();
         this.loadBlogPosts();
+    }
+
+    init() {
+        // Modal event listeners
+        this.modalClose.addEventListener('click', () => this.closeModal());
+        this.modalBackdrop.addEventListener('click', () => this.closeModal());
+        
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.modal.classList.contains('active')) {
+                this.closeModal();
+            }
+        });
     }
 
     async loadBlogPosts() {
@@ -191,8 +216,68 @@ class BlogManager {
     }
 
     async showBlogPost(slug) {
-        // In a real implementation, this would open a modal or navigate to a detail page
-        alert(`Opening blog post: ${slug}\n\nIn production, this would show the full article.`);
+        this.openModal();
+        this.setModalLoading(true);
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/blog/${slug}`);
+            if (!response.ok) throw new Error('Failed to load blog post');
+
+            const post = await response.json();
+            this.renderModalContent(post);
+        } catch (error) {
+            console.error('Error loading blog post:', error);
+            this.modalBody.innerHTML = `
+                <div class="text-center text-danger">
+                    <i class="fas fa-exclamation-circle fa-3x mb-3"></i>
+                    <p>Error loading article. Please try again.</p>
+                </div>
+            `;
+        } finally {
+            this.setModalLoading(false);
+        }
+    }
+
+    renderModalContent(post) {
+        this.modalTitle.textContent = post.title;
+        this.modalDate.innerHTML = `<i class="far fa-calendar me-1"></i>${this.formatDate(post.date)}`;
+        this.modalAuthor.innerHTML = `<i class="far fa-user me-1"></i>${post.author}`;
+        
+        if (post.tags && post.tags.length > 0) {
+            this.modalTags.innerHTML = post.tags.map(tag => 
+                `<span class="tag-badge">${tag}</span>`
+            ).join('');
+        } else {
+            this.modalTags.innerHTML = '';
+        }
+
+        this.modalBody.innerHTML = post.content;
+    }
+
+    setModalLoading(isLoading) {
+        if (isLoading) {
+            this.modalBody.innerHTML = `
+                <div class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            `;
+            this.modalTitle.textContent = '';
+            this.modalDate.textContent = '';
+            this.modalAuthor.textContent = '';
+            this.modalTags.innerHTML = '';
+        }
+    }
+
+    openModal() {
+        this.modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    closeModal() {
+        this.modal.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
     }
 
     formatDate(dateString) {
